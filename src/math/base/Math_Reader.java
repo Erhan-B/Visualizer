@@ -11,16 +11,18 @@ public class Math_Reader {
 	public static void convertExpression(String expression) {
 		
 		String[] split = expression.split("(?!^)"); //Split every char of the given sequence
-		int bracketCounter = 0;
+		int openCounter = 0;
+		int closeCounter = 0;
 		for(int i = 0; i < split.length; i++) {
-			System.out.println(split[i]);
-			if(split[i].equals("(") || split[i].equals(")") || split[i].equals("[")|| split[i].equals("]")) {
-				bracketCounter++;
+			if(split[i].equals("(") || split[i].equals("[")) {
+				openCounter++;
 				System.out.println("Bracket hit: " + split[i]);
 			}
-			System.out.println(bracketCounter);
+			if(split[i].equals(")") || split[i].equals("]")) {
+				closeCounter++;
+			}
 		}
-		if((bracketCounter % 2) != 0) {
+		if(openCounter != closeCounter) {
 			System.err.println("Unequal bracket amount present, please fill in missing");
 			return;
 		}
